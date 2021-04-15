@@ -17,7 +17,7 @@ check-sharing 앱
 ### 정리 노트
 
 
-##### Day 16
+##### Day 16, 17, 18
 - struct와 class의 차이 :    
  지금 단계에서는 struct가 class보다 안전하기 때문에 struct를 쓴다고 배움.   
 심화 내용은 뒤에 계속해서 배울 예정
@@ -76,7 +76,7 @@ NavigationView {
 
 - 숫자 선택 박스 생성 :   
 tipPercentage가 박스 형태로 생성되어 선택할 수 있다.
-적은 갯수에서 요 방법을 쓰길 추천함.
+적은 갯수에서 이 방법을 쓰길 추천함.
 <img src="https://user-images.githubusercontent.com/47841046/114917755-43b6c580-9e61-11eb-9065-04ea651298b7.png" width="40%" height="40%"></img><br/>
 ```swift
 Section(... ) {   
@@ -87,3 +87,33 @@ Section(... ) {
    }
    .pickerStyle(SegmentedPickerStyle())
 ```
+
+- 강제 형변환   
+String을 Double로 형변환 하는 법   
+```swift
+@State private var numberOfPeople = 2
+...
+let peopleCount = Double(numberOfPeople + 2)
+```
+
+- Optional, nil coalescing operator, ??   
+아래의 checkAmount는 어떤 데이터 타입이 들어갈지 모름. 혹시 실패할 가능성 있음.   
+그러므로 이 때는 optional을 이용해 안전하게 Double로 변환을 할 수 있게 한다.   
+형변환이 실패하더라도 0으로 반환된다.
+```swift
+@State private var checkAmount = ""
+...
+let orderAmount = Double(checkAmount) ?? 0
+```
+
+- 소수점 자리 변경   
+C언어의 특징을 반영해서 swift에 적용함.
+안에 있는 숫자를 변경하면 소수점 자리가 바뀜
+%.nf = n의 자리 까지 표기
+```swift
+Text("$\(totalPerPerson, specifier: "%.2f")")
+```
+<img src = "https://user-images.githubusercontent.com/47841046/114920452-69919980-9e64-11eb-9f67-c084f2793b39.png" width = "25%" heigth = "25%"></img><br/>
+<img src = "https://user-images.githubusercontent.com/47841046/114920620-9645b100-9e64-11eb-991b-8432ba900980.png" width = "25%" height = "25%"></img><br/>
+
+
