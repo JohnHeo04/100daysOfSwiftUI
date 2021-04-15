@@ -2,27 +2,35 @@
 //  ContentView.swift
 //  WeSplit
 //  100daysOfSwiftUI
-//  Day16 : Creating views in a loop
+//  Day17 : Reading text from the user with TextField
 //
-//  Created by 허정욱 on 15/04/2021.
+//  Created by Jeonguk Hur on 15/04/2021.
 //  Copyright © 2021 JohnHur. All rights reserved.
 //
 
 import SwiftUI
 
 struct ContentView: View {
-    let students = ["Harry", "Hermione", "Ron", "John", "Luke", "Peter", "Ram", "Zil", "Biden"]
-    // studnets는 @State 쓸 필요 없음. let인 'constant'라서 때문이다.
-    @State private var selectedStudent = "Ram"
+    @State private var checkAmount = ""
+    @State private var numberOfPeople = 2
+    @State private var tipPercentage = 2
     
-    // ForEach는 SwiftUI의 Picker View와 함께 쓸 때 유용하다.
+    let tipPercentages = [10, 15, 20, 25, 0]
     
     var body: some View {
-        Picker("Select your student", selection: $selectedStudent) {
-            ForEach(0 ..< students.count) {
-                Text(self.students[$0])
+        Form {
+            Section {
+                TextField("Amount", text: $checkAmount)
+                    .keyboardType(.decimalPad)
+            }
+    // 기존의 스맛폰 키보드는 qwerty식으로 TextField를 채우게 됨
+    // 하지만, .keyboardType 메소드? 함수? 를 쓰게 되면
+    // qwerty식에서 -> 0부터 9로 탭하는 다른 키패드가 생기게 됨.
+            Section {
+                Text("$\(checkAmount)")
             }
         }
+        
     }
 }
 
