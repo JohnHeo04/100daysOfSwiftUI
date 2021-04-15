@@ -27,7 +27,7 @@ struct는 안전한 동시에 제한적이기 때문에 변수를 지정할 때 
 @State private var tapCount = 0
 ```
 
-- $   
+- $ :   
 위 표시는 앞의 속성이 바뀌면 위의 속성 값을 다시 읽는다.
 
 ```swift
@@ -36,8 +36,22 @@ struct는 안전한 동시에 제한적이기 때문에 변수를 지정할 때 
    TextField("Enter your name is", text: $name)
 ```
 
-
-
-
-
+- ForEach는 Picker View와 함께 쓸때 유용   
+```swift
+var body: some View {
+   Picker("Select your student", selection: $selectedStudent) {
+      ForEach(0 ..< students.count) {
+         Text(self.students[$0])
+```
+- 숫자패드 :      
+기본 qwerty방식을 숫자패드로 바꾸는 법 두 가지   
+.decimalPad   
+.numberPad
+```swift
+Form {
+    Section {
+         TextField("Amount", text: $checkAmount)
+             .keyboardType(.decimalPad)
+    }
+```
 
