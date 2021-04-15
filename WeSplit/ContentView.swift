@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  WeSplit
 //  100daysOfSwiftUI
-//  Day17 : Adding a segmented control for tip percentages
+//  Day17 : Calculating the total per person
 //
 //  Created by Jeonguk Hur on 16/04/2021.
 //  Copyright © 2021 JohnHur. All rights reserved.
@@ -17,26 +17,41 @@ struct ContentView: View {
     
     let tipPercentages = [10, 15, 20, 25, 0]
     
+    var totalPerPerson: Double {
+        // String을 Double로 형변환하는 법은 다음과 같다.
+        // Double(문자열의 변수명)
+        // Eg) let stringValue = "0.5"
+        // ->  let doubleValue = Double(string(Value)
+        
+        // 위의 checkAmount에는 어떤 데이터 타입이 들어갈지 모른다.
+        // 그러므로 이때는 optional을 이용해 안전하게 Double로 변환할 수 있게 된다.
+        // 여기서는 가장 쉬운 방법으로 nil coalescing operator인 ??를 사용한다.
+        let peopleCount = Double(numberOfPeople + 2)
+        let tipSelection = Double(tipPercentages[tipPercentage])
+        let orderAmount = Double(checkAmount) ?? 0
+        // checkAmount는 Double로 형변환을 하게 된다.
+        // 그러나 형변환이 실패하더라도 optional을 썼기 때문에 0으로 사용된다.
+        
+        let tipValue = orderAmount / 100 * tipSelection
+        let grandTotal = orderAmount + tipValue
+        let amountPerPerson = grandTotal / peopleCount
+        
+        return amountPerPerson
+        
+    }
+    
     var body: some View {
-        // 아래의 NavigationView는 많은 프로그램들이 실행되고 있을 때 사용자가 어디있는지 보여주는 네비게이션의 역할을 하게 된다.
         NavigationView {
             Form {
                 Section {
                     TextField("Amount", text: $checkAmount)
                         .keyboardType(.decimalPad)
-                // 여기서는 아래 팁 박스에 있는 pickerStyle(SegmentedPickerStyle())이 적합하지 않다.
                     Picker("Number of people", selection: $numberOfPeople) {
                         ForEach(2 ..< 100) {
                             Text("\($0) people")
                         }
                     }
                 }
-                // 바로 밑 Section 다음 (header~ 는 화면상 tipPercentages박스 위에 나오는 제목을 회색 바탕에 위치 시킨다.
-                
-                // 밑에 .pickerStyle(SegmentedPickerStyle())은 박스로 tipPercentages가 5개 생성되어 선택할 수 있게 된다.
-                // 실험: 위의 numberOfPeople에서도 적용하려 해봤지만 정수가 2부터 100까지 있어 적용은 되지만, 굉장히 적합하지 않은 상태의
-                //      UI가 생성된다.
-                // header 대신 footer를 사용하게 되면 "How muc~" 텍스트가 팁 박스 밑에 생성된다.
                 Section(footer: Text("How much tip do you want to leave?")) {
                     Picker("Tip percentage", selection: $tipPercentage) {
                         ForEach(0 ..< tipPercentages.count) {
@@ -47,11 +62,14 @@ struct ContentView: View {
                 }
 
                 Section {
-                    Text("$\(checkAmount)")
+                    Text("$\(totalPerPerson, specifier: "%.2f")")
+                    // 여기 위의 "%.2f"는 C 언어이다.
+                    // 의미 : a two-digit floating-point number
+                    // %.(int)f 여기서 int는 소수 몇째 자리까지 나타낼지를 표기한다.
+                    // 1 = 첫 째 자리, 2 = 둘 째 자리, 3 = 셋 째 자리
                 }
             }
             .navigationBarTitle("WeSplit")
-            // '네비게이션뷰'에 제목을 생성함
         }
     }
 }
