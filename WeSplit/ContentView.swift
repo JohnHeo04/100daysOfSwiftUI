@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  WeSplit
 //  100daysOfSwiftUI
-//  Day16 : Binding state to user interface controls
+//  Day16 : Creating views in a loop
 //
 //  Created by 허정욱 on 15/04/2021.
 //  Copyright © 2021 JohnHur. All rights reserved.
@@ -11,16 +11,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var name = " "
-    // Struct에서 Property인 name을 바꾸기 위해 @State가 쓰임.
+    let students = ["Harry", "Hermione", "Ron", "John", "Luke", "Peter", "Ram", "Zil", "Biden"]
+    // studnets는 @State 쓸 필요 없음. let인 'constant'라서 때문이다.
+    @State private var selectedStudent = "Ram"
     
-    // 하지만 이번엔 @State만 쓴다고해서 작동하지 않음
-    // 고로 밑 TextField 안에 있는 text: $(달러) '$달러' 표기를 써 줌.
-    // $ <- 이 표시는 앞에서 뭔가 바뀐다면 앞의 속성 값을 다시 읽어야한다.
+    // ForEach는 SwiftUI의 Picker View와 함께 쓸 때 유용하다.
+    
     var body: some View {
-        Form {
-            TextField("Enter your name is", text: $name)
-            Text("Your name is \(name)")
+        Picker("Select your student", selection: $selectedStudent) {
+            ForEach(0 ..< students.count) {
+                Text(self.students[$0])
+            }
         }
     }
 }
