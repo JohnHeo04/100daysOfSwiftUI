@@ -31,7 +31,9 @@ struct는 안전한 동시에 제한적이기 때문에 변수를 지정할 때 
 위 표시는 앞의 속성이 바뀌면 위의 속성 값을 다시 읽는다.
 
 ```swift
-TextField("Enter your name is", text: $name)
+@State private var name = ""
+...
+   TextField("Enter your name is", text: $name)
 ```
 
 
