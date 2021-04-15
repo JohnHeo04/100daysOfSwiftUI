@@ -55,3 +55,21 @@ Form {
     }
 ```
 
+- NavigationView :   
+많은 프로그램들이 실행되고 있을 때 사용자가 어느 화면에 있는지 보여 줌.
+```swift
+NavigationView {
+   Form {
+      Section {
+         ...
+         }
+      }
+   }
+```
+
+- NavigationView Title :   
+```Swift
+.navigationBarTitle("WeSplit")
+```
+
+
