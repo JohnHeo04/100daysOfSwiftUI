@@ -2,9 +2,9 @@
 //  ContentView.swift
 //  WeSplit
 //  100daysOfSwiftUI
-//  Day17 : Reading text from the user with TextField
+//  Day17 : Creating pickers in a form
 //
-//  Created by Jeonguk Hur on 15/04/2021.
+//  Created by Jeonguk Hur on 16/04/2021.
 //  Copyright © 2021 JohnHur. All rights reserved.
 //
 
@@ -18,20 +18,27 @@ struct ContentView: View {
     let tipPercentages = [10, 15, 20, 25, 0]
     
     var body: some View {
-        Form {
-            Section {
-                TextField("Amount", text: $checkAmount)
-                    .keyboardType(.decimalPad)
+        // 아래의 NavigationView는 많은 프로그램들이 실행되고 있을 때 사용자가 어디있는지 보여주는 네비게이션의 역할을 하게 된다.
+        NavigationView {
+            Form {
+                Section {
+                    TextField("Amount", text: $checkAmount)
+                        .keyboardType(.decimalPad)
+                    
+                    Picker("Number of people", selection: $numberOfPeople) {
+                        ForEach(2 ..< 100) {
+                            Text("\($0) people")
+                        }
+                    }
+                }
+
+                Section {
+                    Text("$\(checkAmount)")
+                }
             }
-    // 기존의 스맛폰 키보드는 qwerty식으로 TextField를 채우게 됨
-    // 하지만, .keyboardType 메소드? 함수? 를 쓰게 되면
-    // qwerty식에서 -> 0부터 9로 탭하는 다른 키패드가 생기게 됨.
-    // 여기에 방법이 두 가지가 있음 .numberPad   .decimalPad
-            Section {
-                Text("$\(checkAmount)")
-            }
+            .navigationBarTitle("WeSplit")
+            // '네비게이션뷰'에 제목을 생성함
         }
-        
     }
 }
 
