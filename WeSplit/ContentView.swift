@@ -26,6 +26,7 @@ struct ContentView: View {
     // 기존의 스맛폰 키보드는 qwerty식으로 TextField를 채우게 됨
     // 하지만, .keyboardType 메소드? 함수? 를 쓰게 되면
     // qwerty식에서 -> 0부터 9로 탭하는 다른 키패드가 생기게 됨.
+    // 여기에 방법이 두 가지가 있음 .numberPad   .decimalPad
             Section {
                 Text("$\(checkAmount)")
             }
