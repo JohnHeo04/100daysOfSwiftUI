@@ -14,7 +14,8 @@ check-sharing 앱
 ***
 
 
-### 배운점
+### 정리 노트
+
 
 ##### Day 16
 - struct와 class의 차이 :    
@@ -46,7 +47,8 @@ var body: some View {
 - 숫자패드 :      
 기본 qwerty방식을 숫자패드로 바꾸는 법 두 가지   
 .decimalPad   
-.numberPad
+.numberPad    
+<img src="https://user-images.githubusercontent.com/47841046/114918831-82994b00-9e62-11eb-8708-a8eeed1989e7.png" width = "20%" height = "20%"></img><br/>
 ```swift
 Form {
     Section {
@@ -72,4 +74,16 @@ NavigationView {
 .navigationBarTitle("WeSplit")
 ```
 
-
+- 숫자 선택 박스 생성 :   
+tipPercentage가 박스 형태로 생성되어 선택할 수 있다.
+적은 갯수에서 요 방법을 쓰길 추천함.
+<img src="https://user-images.githubusercontent.com/47841046/114917755-43b6c580-9e61-11eb-9065-04ea651298b7.png" width="40%" height="40%"></img><br/>
+```swift
+Section(... ) {   
+   Picker("Tip ...", selection: $tipPercentage) {
+      ForEach(0 ..< tipPercentages.count) {
+         Text(\(self.tipPercentages[$0])%")
+      }
+   }
+   .pickerStyle(SegmentedPickerStyle())
+```
