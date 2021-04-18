@@ -19,6 +19,7 @@ struct ContentView: View {
         
     // Spacer()를 쓰게되면, 남아있는 공간으로 밀어버림
         VStack(spacing: 20) {
+            Text("Frist")
             Text("Second")
             Text("Third")
             Spacer()
