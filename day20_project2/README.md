@@ -13,7 +13,7 @@ VStack(spacing: 20) {
       Text("Second")
       Spacer()
 ```
-   
+***   
    
 ### 2.Colors and frames   
 **.background(Color.red)** : 텍스트에 빨간 배경 삽입   
@@ -30,7 +30,26 @@ ZStack {
   }
 ```
 
-
+***
 
 ### 3.Gradients
+선형 그라데이션
+```swift
+LinearGradient(gradient: Gradient(colors: [.white, .black]), startPoint: .top, endPoint: .bottom)
+```
+원형 그라데이션
+```swift
+RadialGradient(gradient: Gradient(colors: [.blue, .black]), center: .center, startRadius: 20, endRadius: 200)
+```
+Angular 그라데이션
+```swift
+AngularGradient(gradient: Gradient(colors: [.red,.yellow,.green,.blue,.purple,.red]), center: .center)
+```
+👇 <선형, 원형, Angular>
+|Feature|Description|
+:-------------------------:|:-------------------------:
+|Linear Gradient|<img src="https://user-images.githubusercontent.com/47841046/115150616-2291e700-a0a4-11eb-92f0-e097910d10ba.png"></img><br/>|
+|Radial Gradient|<img src="https://user-images.githubusercontent.com/47841046/115150773-d4311800-a0a4-11eb-828d-34f64859db93.png"></img><br/>|
+|Angular Gradient|<img src="https://user-images.githubusercontent.com/47841046/115151128-7e5d6f80-a0a6-11eb-9b9d-946988b73809.png"></img><br/>|
+
 
