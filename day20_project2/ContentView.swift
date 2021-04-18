@@ -1,28 +1,26 @@
 //
 //  ContentView.swift
 //  day20_project2
+
+//  Day20 : Colors and frames
 //
 //  Created by  John Hur on 17/04/2021.
 //  Copyright © 2021 JohnHur. All rights reserved.
-//
+
+//  Apple은 기본적으로 상단 바와 하단 바에 '안전 지역'을 설정해 놓음.
+//  하지만, edgesIgnoringSafeArea(.all)을 통해 색을 꽉 채울 수 있음
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-    // VStack은 수직 정렬
-    // VStack은 아래의 Text를 수직으로 출력해 줌. 하지만 여백 x
-    // 이 때, VStack(spacing:20) 를 붙이면 여백이 생김
-    // VStack(alignment: .leading)을 사용하게 되면 왼쪽 정렬 가능
+        // 텍스트에 색 배경을 넣게 됨 .backround(Color.red)
         
-    // HStack은 수평 정렬
-        
-    // Spacer()를 쓰게되면, 남아있는 공간으로 밀어버림
-        
-    // ZStack은 깊이로 정렬함. 그러므로 두 개의 텍스트가 겹쳐보인다.
-        ZStack(alignment: .top) {
-            Text("Frist")
-            Text("Second")
+        // 원하는 만큼 색 채우기
+        // Color.red.frame(width: 200, height: 200)
+        ZStack {
+            Color.yellow.edgesIgnoringSafeArea(.all)
+            Text("Your content")
         }
     }
 }
