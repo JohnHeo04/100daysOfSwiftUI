@@ -63,5 +63,17 @@ Button(action: {
 ```
 <img src = "https://user-images.githubusercontent.com/47841046/115152211-25440a80-a0ab-11eb-8780-451d7e91edbb.png" width="30%" height="30%"></img>
 
-
+***
+### 5.Showing alert messages
+```swift
+@State private var showingAlert = false
+...
+   Button("Show Alert") {
+      self.showingAlert = true
+   }
+   .alert(isPresented: $shoingAlert) {
+      Alert(title: Text("Hello SwiftUI!"), message: Text("This is some detail message"), dismissButton: .default(Text("OK")))
+      }
+   }
+```
 
