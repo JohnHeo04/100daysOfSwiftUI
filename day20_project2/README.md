@@ -52,4 +52,16 @@ AngularGradient(gradient: Gradient(colors: [.red,.yellow,.green,.blue,.purple,.r
 |Radial Gradient|<img src="https://user-images.githubusercontent.com/47841046/115150773-d4311800-a0a4-11eb-828d-34f64859db93.png"></img><br/>|
 |Angular Gradient|<img src="https://user-images.githubusercontent.com/47841046/115151128-7e5d6f80-a0a6-11eb-9b9d-946988b73809.png"></img><br/>|
 
+***
+### 4.Buttons and images
+```swift
+Button(action: {
+            print("Button was tapped")}) {
+                HStack(spacing: 10) {
+                    Image(systemName: "pencil")
+                    Text("Edit")
+```
+<img src = "https://user-images.githubusercontent.com/47841046/115152211-25440a80-a0ab-11eb-8780-451d7e91edbb.png" width="30%" height="30%"></img>
+
+
 
