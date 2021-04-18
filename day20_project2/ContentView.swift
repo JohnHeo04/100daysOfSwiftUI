@@ -18,10 +18,11 @@ struct ContentView: View {
     // HStack은 수평 정렬
         
     // Spacer()를 쓰게되면, 남아있는 공간으로 밀어버림
-        VStack(spacing: 20) {
+        
+    // ZStack은 깊이로 정렬함. 그러므로 두 개의 텍스트가 겹쳐보인다.
+        ZStack(alignment: .top) {
             Text("Frist")
-            Text("Third")
-            Spacer()
+            Text("Second")
         }
     }
 }
