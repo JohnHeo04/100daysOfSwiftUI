@@ -1,48 +1,68 @@
 //
 //  ContentView.swift
 //  day21_pro2_pa2
-//  Day21 : Stacking up buttons
+//  Day21 : Showing the player's score with an alert
 //
-//  Created by Johnhur on 19/04/2021.
+//  Created by Johnhur on 20/04/2021.
 //  Copyright © 2021 JohnHur. All rights reserved.
 //
 
 import SwiftUI
 
 struct ContentView: View {
-    var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"]
-    // 아래의 정수형태의 변수는 어떤 나라 이미지가 맞는지 확인함.
-    // Int.random함수는 숫자를 자동으로 고른다.
-    var correctAnswer = Int.random(in: 0...2)
+    // .shuffled() 메소드는 자동으로 배열의 순서를 바꾼다.
+    @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
+
+    @State private var correctAnswer = Int.random(in: 0...2)
+    
+    // 아래의 변수는 알림 창에서 보이게 된다.
+    @State private var showingScore = false
+    @State private var scoreTitle = ""
     
     var body: some View {
-        //ZStack을 하나 더 만들어 흰색이 있는 국기를 구별시켜 줌.
         ZStack {
             Color.blue.edgesIgnoringSafeArea(.all)
             
-            //간격을 30정도 주어 더 보기 좋게함.
             VStack(spacing: 30) {
-                //아래의 VStack을 통해 텍스트를 수직형태로 정렬
                 VStack {
                     Text("Tap the flag of")
-                        //글자를 흰색으로 만드는 마법
                         .foregroundColor(.white)
                     Text(countries[correctAnswer])
                         .foregroundColor(.white)
                 }
                 
                 ForEach(0 ..< 3) { number in Button(action: {
-                    // flag was tapped
+                    self.flagTapped(number)
                 }) { Image(self.countries[number])
-                        // 아래의 modifier(수식어)는 original 이미지를 그대로 렌더링 함
                         .renderingMode(.original)
                         }
                     }
-                // *복습:아래의 함수는 화면 끝으로 밀어버림
                 Spacer()
             }
         }
+        .alert(isPresented: $showingScore) {
+            Alert(title: Text(scoreTitle), message: Text("Your score is ???"), dismissButton: .default(Text("Continue")) {
+                    self.askQuestion()
+                })
+        }
     }
+    // 어떤 국기를 택하건 간에 알림창으로 뜨게 됨
+    // var body:... 다음 나옴
+    func flagTapped(_ number: Int) {
+        if number == correctAnswer {
+            scoreTitle = "Correct"
+        } else {
+            scoreTitle = "Wrong"
+        }
+        
+        showingScore = true
+    }
+    // askQuestoin() 메소드는 국기를 섞고 새로운 답을 고르도록 리셋시킴
+    func askQuestion() {
+        countries.shuffle()
+        correctAnswer = Int.random(in: 0...2)
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
