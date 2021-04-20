@@ -10,7 +10,7 @@ modifier를 잘 활용하면 폰트와 이미지를 보다 이쁘게 다룰 수 
 안의 코드를 통해 각 Text or Imgage를 통해 어떻게 쌓았는지 볼 수 있음
    
    
-### Guess the Flag, Find a correct country
+### Guess the Flag, Find the correct country
    
    
 ![a](https://user-images.githubusercontent.com/47841046/115363272-46b50b80-a1fd-11eb-9cd5-ef847ece45a7.png)
