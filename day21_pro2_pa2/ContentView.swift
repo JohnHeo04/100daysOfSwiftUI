@@ -1,40 +1,53 @@
 //
 //  ContentView.swift
 //  day21_pro2_pa2
-//  Day21 : Showing the player's score with an alert
+//  Day21 : Styling our flags
 //
 //  Created by Johnhur on 20/04/2021.
 //  Copyright © 2021 JohnHur. All rights reserved.
 //
+// SwiftUI는 수 많은 modifiers-수식어, 꾸며주는..-를 가지고 있다.
+// 이런 modifiers들은 폰트들과 이미지들을 렌더링할 수 있도록 도움.
+// 아래는 modifiers들을 흔히 쌓는 방식이다.
+
+// 코드들을 자세히 보면 더미 형태로 구성되어있음
+// 연습을 할 때
 
 import SwiftUI
 
 struct ContentView: View {
-    // .shuffled() 메소드는 자동으로 배열의 순서를 바꾼다.
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
 
     @State private var correctAnswer = Int.random(in: 0...2)
     
-    // 아래의 변수는 알림 창에서 보이게 된다.
     @State private var showingScore = false
     @State private var scoreTitle = ""
     
     var body: some View {
         ZStack {
-            Color.blue.edgesIgnoringSafeArea(.all)
+            // 더 나아 보이게 만들기 위해 파란 단일 배경에서 선형 그라데이션으로 변경함.
+            LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 30) {
                 VStack {
                     Text("Tap the flag of")
                         .foregroundColor(.white)
+                        .fontWeight(.medium)
                     Text(countries[correctAnswer])
                         .foregroundColor(.white)
+                        // 아래의 modifier는 폰트를 크고 black체로 해줌
+                        .font(.largeTitle)
+                        .fontWeight(.black)
                 }
                 
                 ForEach(0 ..< 3) { number in Button(action: {
                     self.flagTapped(number)
                 }) { Image(self.countries[number])
                         .renderingMode(.original)
+                    .clipShape(Capsule())
+                    .overlay(Capsule()
+                        .stroke(Color.black, lineWidth:1))
+                    .shadow(color: .black, radius: 2)
                         }
                     }
                 Spacer()
@@ -46,8 +59,6 @@ struct ContentView: View {
                 })
         }
     }
-    // 어떤 국기를 택하건 간에 알림창으로 뜨게 됨
-    // var body:... 다음 나옴
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             scoreTitle = "Correct"
@@ -57,7 +68,6 @@ struct ContentView: View {
         
         showingScore = true
     }
-    // askQuestoin() 메소드는 국기를 섞고 새로운 답을 고르도록 리셋시킴
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
