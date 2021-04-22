@@ -1,7 +1,7 @@
 //
 //  ContentView.swift
 //  day23_pro3_pa1
-//  Day23: Views as properties
+//  Day23: View composition
 
 //  Created by Johnhur on 22/04/2021.
 //  Copyright © 2021 JohnHur. All rights reserved.
@@ -12,18 +12,28 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    var motto1: some View { Text("Draco dormiens")}
-    let motto2 = Text("nanquam titillandus")
+struct CapsuleText: View {
+    var text: String
     
     var body: some View {
-        VStack {
-            motto1
-                .foregroundColor(.red)
-            motto2
-                .foregroundColor(.blue)
+        Text(text)
+            .font(.largeTitle)
+            .padding()
+            .foregroundColor(.white)
+            .background(Color.blue)
+            .clipShape(Capsule())
+        
+    }
+}
+struct ContentView: View {
+    var body: some View {
+        VStack(spacing: 10) {
+            CapsuleText(text: "First")
+                .foregroundColor(.white)
+            CapsuleText(text: "Second")
+                .foregroundColor(.yellow)
+        
         }
-
     }
 }
 
