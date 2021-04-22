@@ -11,4 +11,5 @@ UIKit에는 UIView라 불리는 클래스가 있다. 여기엔 많은 properties
 배경색, 어떻게 위치 잡을지에 대한 제약, 안에 들어갈 콘텐츠 레이어 렌더링 등   
 모든 UIView와 UIView subclass가 이렇게 작동한다.   
    
+#### What is behind the main SwiftUI view?
 
