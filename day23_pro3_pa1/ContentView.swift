@@ -1,7 +1,7 @@
 //
 //  ContentView.swift
 //  day23_pro3_pa1
-//  Day23: View composition
+//  Day23: Custom modifiers
 
 //  Created by Johnhur on 22/04/2021.
 //  Copyright © 2021 JohnHur. All rights reserved.
@@ -12,28 +12,53 @@
 
 import SwiftUI
 
-struct CapsuleText: View {
-    var text: String
-    
-    var body: some View {
-        Text(text)
+struct Title: ViewModifier {
+    func body(content: Content) -> some View {
+        content
             .font(.largeTitle)
-            .padding()
             .foregroundColor(.white)
+            .padding()
             .background(Color.blue)
-            .clipShape(Capsule())
-        
+            .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
+
+extension View {
+    func titleStyle() -> some View {
+        self.modifier(Title())
+    }
+}
+
+struct Watermark: ViewModifier {
+    var text: String
+    
+    func body(content: Content) -> some View {
+        ZStack(alignment: .bottomTrailing) {
+            content
+            
+            Text(text)
+                .font(.caption)
+                .foregroundColor(.white)
+                .padding(5)
+                .background(Color.black)
+        }
+    }
+}
+
+extension View {
+    func watermarked(with text: String) -> some View {
+        self.modifier(Watermark(text: text))
+    }
+}
+
+
+
 struct ContentView: View {
     var body: some View {
-        VStack(spacing: 10) {
-            CapsuleText(text: "First")
-                .foregroundColor(.white)
-            CapsuleText(text: "Second")
-                .foregroundColor(.yellow)
-        
-        }
+        Color.blue
+            .frame(width: 300, height: 300)
+            .watermarked(with: "Hacking with Swift")
+    
     }
 }
 
