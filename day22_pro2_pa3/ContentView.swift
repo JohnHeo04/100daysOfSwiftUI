@@ -71,12 +71,14 @@ struct ContentView: View {
                 })
         }
     }
+    // 아래 else 구문에 나오는 \(countries[number])을 써줌으로써
+    // 틀린 국기의 이름을 보여줌.
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             scoreTitle = "Correct"
             userScore += 1
         } else {
-            scoreTitle = "Wrong! That's the flag of \(countries[correctAnswer])"
+            scoreTitle = "Wrong! That's the flag of \(countries[number])"
             userScore -= 1
         }
         showingScore = true
