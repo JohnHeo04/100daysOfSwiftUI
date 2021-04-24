@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "56D1740526274B05009F7687"
-               BuildableName = "WeSplit.app"
+               BuildableName = "day16_17_18.app"
                BlueprintName = "WeSplit"
                ReferencedContainer = "container:WeSplit.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "56D1740526274B05009F7687"
-            BuildableName = "WeSplit.app"
+            BuildableName = "day16_17_18.app"
             BlueprintName = "WeSplit"
             ReferencedContainer = "container:WeSplit.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "56D1740526274B05009F7687"
-            BuildableName = "WeSplit.app"
+            BuildableName = "day16_17_18.app"
             BlueprintName = "WeSplit"
             ReferencedContainer = "container:WeSplit.xcodeproj">
          </BuildableReference>
