@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  day24_pro3_pa2
 //
-//  Created by 허정욱 on 23/04/2021.
+//  Created by JohnHur on 23/04/2021.
 //  Copyright © 2021 JohnHur. All rights reserved.
 //
 
