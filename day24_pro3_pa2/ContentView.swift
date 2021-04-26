@@ -8,7 +8,7 @@
 //
 //  Challenge.2
 //  Go back to project 1 "WeSplit" and use a conditional modifier to change the total amount text view to red if the user selects a 0% tip.
-//  Total Amount에 조건문을 사용하여 사용자가 0% 팁을 선택한다면 텍스트를 빨간색으로 바꿔주기n
+//  Total Amount에 조건문을 사용하여 사용자가 0% 팁을 선택한다면 텍스트를 빨간색으로 바꿔주기
 
 
 import SwiftUI
@@ -17,8 +17,7 @@ struct ContentView: View {
     @State private var checkAmount = ""
     @State private var numberOfPeople = 2
     @State private var tipPercentage = 2
-    @State private var totalAmount = 0
-    
+        
     let tipPercentages = [10, 15, 20, 25, 0]
     
     var totalPerPerson: Double {
@@ -33,6 +32,17 @@ struct ContentView: View {
         
         return amountPerPerson
         
+    }
+    // 총 양을 나타내는 변수 = totalAmount
+    // 만약 위와 같은 변수가 반복될때 줄이는 방법은...?
+    var totalAmount : Double {
+        let tipSelection = Double(tipPercentages[tipPercentage])
+        let orderAmount = Double(checkAmount) ?? 0
+        
+        let tipValue = orderAmount / 100 * tipSelection
+        let totalAmount = tipValue + orderAmount
+        
+        return totalAmount
     }
     
     var body: some View {
@@ -55,8 +65,16 @@ struct ContentView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 }
+                // Challenge 2
+                // Total amount 넣는 곳
+                // tipPercentages 배열중에 0 이라면 빨간색을 나타내라
+                Section(header: Text("Total amount")) {
+                    Text("$\(totalAmount, specifier: "%.0f")")
+                        .foregroundColor(tipPercentages[tipPercentage] == 0 ? Color.red : Color.primary)
 
-                Section {
+                }
+
+                Section(header: Text("Amount per person")) {
                     Text("$\(totalPerPerson, specifier: "%.2f")")
                 }
             }
