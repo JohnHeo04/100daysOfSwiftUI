@@ -1,12 +1,10 @@
 //
 //  ContentView.swift
-//  day26 : Selecting dates and times with DatePicer
+//  day26 : Working with dates
 //
 //  Created by JohnHur on 2021/04/28.
 //
-//  같은 DatePicker 메소드임에도 2019년, 2021년의 SwiftUI가 다르다.
-//  업데이트 했나보다...
-
+//  86,400 seconds = 1day
 
 
 import SwiftUI
@@ -15,16 +13,22 @@ struct ContentView: View {
     @State private var wakeUp = Date()
     
     var body: some View {
-//        let now = Date()
-//        let tomorrow = Date().addingTimeInterval(86400)
-//        let range = now ... tomorrow
+//        단락이 넘어 갈 수록 애플에서는 개발자에게 쉬운방법을 제공해준다는걸 볼 수 있음.
+//        var components = DateComponents()
+//        components.hour = 8
+//        components.minute = 0
+//        let date = Calendar.current.date(from: components) ?? Date()
         
-//      $wakeUp, ~ 다음
-//      displayedComponents: .date는 월,날짜 그리고 년도를 표기
-//      .hourAndMinute에는 사용자에게 시간과 분을 보여준다.
-
-//      in: Date()...는 미래의 날짜를 보여주고 과거는 지정할 수 없다.
-        DatePicker("", selection: $wakeUp, in: Date()...)
+//        let components = Calendar.current.dateComponents([.hour, .minute], from: someDate)
+//        let hour = components.hour ?? 0
+//        let minute = components.minute ?? 0
+        
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        let dateString = formatter.string(from: Date())
+        
+        
+        return DatePicker("Please enter a date", selection: $wakeUp, displayedComponents: .hourAndMinute)
                 .labelsHidden()
     }
 }
