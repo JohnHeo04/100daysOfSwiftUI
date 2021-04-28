@@ -22,6 +22,8 @@ struct ContentView: View {
 //      $wakeUp, ~ 다음
 //      displayedComponents: .date는 월,날짜 그리고 년도를 표기
 //      .hourAndMinute에는 사용자에게 시간과 분을 보여준다.
+
+//      in: Date()...는 미래의 날짜를 보여주고 과거는 지정할 수 없다.
         DatePicker("", selection: $wakeUp, in: Date()...)
                 .labelsHidden()
     }
