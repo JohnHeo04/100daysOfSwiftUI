@@ -2,7 +2,7 @@
 //  day26_App.swift
 //  day26_
 //
-//  Created by 허정욱 on 2021/04/28.
+//  Created by JohnHur on 2021/04/28.
 //
 
 import SwiftUI
