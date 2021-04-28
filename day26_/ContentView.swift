@@ -1,16 +1,19 @@
 //
 //  ContentView.swift
-//  day26_
+//  day26 : Entering numbers with Stepper
 //
-//  Created by 허정욱 on 2021/04/28.
+//  Created by JohnHur on 2021/04/28.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    @State private var sleepAmount = 8.0
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Stepper(value: $sleepAmount) {
+                Text("\(sleepAmount) hours")
+        }
     }
 }
 
