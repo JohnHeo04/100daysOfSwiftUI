@@ -15,6 +15,8 @@ struct ContentView: View {
     //  다른 옵션으로는 Slider가 있음, 요건 나중에 배우게 됨.
     
     //  Stepper는 in으로 값을 받아들일 수 있음
+    //  소수 자리를 줄여주는 기존의 %f 대신 -> %g로 바뀜
+    //  %g 는 끝의 숫자 0을 제거해준다.
     var body: some View {
         Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
                 Text("\(sleepAmount, specifier: "%g") hours")
