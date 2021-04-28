@@ -1,26 +1,29 @@
 //
 //  ContentView.swift
-//  day26 : Entering numbers with Stepper
+//  day26 : Selecting dates and times with DatePicer
 //
 //  Created by JohnHur on 2021/04/28.
 //
+//  같은 DatePicker 메소드임에도 2019년, 2021년의 SwiftUI가 다르다.
+//  업데이트 했나보다...
+
 
 
 import SwiftUI
 
 struct ContentView: View {
-    @State private var sleepAmount = 8.0
+    @State private var wakeUp = Date()
     
-    //  Stepper 메소드는 '+', '-'를 탭해서 정확한 숫자를 선택할 수 있게 해줌
-    //  다른 옵션으로는 Slider가 있음, 요건 나중에 배우게 됨.
-    
-    //  Stepper는 in으로 값을 받아들일 수 있음
-    //  소수 자리를 줄여주는 기존의 %f 대신 -> %g로 바뀜
-    //  %g 는 끝의 숫자 0을 제거해준다.
     var body: some View {
-        Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
-                Text("\(sleepAmount, specifier: "%g") hours")
-        }
+//        let now = Date()
+//        let tomorrow = Date().addingTimeInterval(86400)
+//        let range = now ... tomorrow
+        
+//      $wakeUp, ~ 다음
+//      displayedComponents: .date는 월,날짜 그리고 년도를 표기
+//      .hourAndMinute에는 사용자에게 시간과 분을 보여준다.
+        DatePicker("", selection: $wakeUp, in: Date()...)
+                .labelsHidden()
     }
 }
 
