@@ -6,7 +6,7 @@
 //  Created by John Hur on 2021/04/29.
 //
 //  OVERVIEW
-//  이 앱은 date picker와 두 가지의 steppers를 결합해 사용자가 언제 일어나길 원하는지 계산해주는 앱이다. 사용자가 얼마나 잠을 자야하는지, 커피를 얼마나 맘셔야하는지 알려준다.
+//  이 앱은 date picker와 두 가지의 steppers를 결합해 사용자가 언제 일어나길 원하는지 계산해주는 앱이다. 사용자가 얼마나 잠을 자야하는지, 커피를 얼마나 마셔야하는지 알려준다.
 
 
 import SwiftUI
