@@ -85,6 +85,46 @@ struct ContentView: View {
             Text("\(coffeeAmount) cups")
             }
 ```
+*** 
+#### Core ML (Machine Learning)
+Calendar의 데이터 타입은 'date'로 되어있음   
+'date' --> 'double'로 바꿔야함   
+그러기 위해 dateComponents 메소드 사용
+```swift
+func caculatorBedtimes() {
+         ...
+         let components = Calendar.current.dateComponents([.hour,.minute], from: wakeUp)
+```
+Calendar에는 'Yeaer', 'Month', 'Day', 'Timezone' 등 다양한 속성이 있음   
+그러나 모든 속성이 설정되어있지는 않음   
+'hour', 'minute만 set   
+
+고로 optional이 설정되어야 함   
+
+```swift
+components.minute ?? 0
+```
+
+'hour'과 'minute'은 'seconds'로 계산한다.   
+그리고 'double'형으로 변환
+ ```swift
+ let hour = (components.hour ?? 0) * 60 * 60
+ let minute = (components.minute ?? 0) * 60
+ ```
+예측값 = 잠이 얼마나 필요한지   
+하지만 사용자는 이 값을 필요로 하지 않음   
+
+애플에서는 강력한 APIs를 제공함   
+고로 우리는 직접적으로 Date 값을 새로운 Date값으로 빼준다.
+```swift
+let sleepTime = wakeUp - prediction.actualSleep
+```
+이것으로 우리는 사용자가 몇시에 자러가야하는지 정확히 할 수 있게 되었다.    
+
+
+
+
+
 
 
 
