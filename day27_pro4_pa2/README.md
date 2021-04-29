@@ -7,7 +7,7 @@ Project4 date picker(datePicker)와 두 가지의 steppers(Stepper)를 결합해
 <img src = "https://user-images.githubusercontent.com/47841046/116516456-989a1780-a908-11eb-93c4-6a765a337ff2.png" > </img><br/>
    
 ***
-#### .navigationBarTitle, Items
+### .navigationBarTitle, Items
 오른쪽 상단 위에 trailing을 통해 'Calculate'라는 텍스트를 놓을 수 있다.    
 만약 여러 버튼을 놓고 싶다면 HStack을 사용하기   
 아래의 action action: calculateBedtimes 함수는 다음에 나오게 됨   
@@ -27,7 +27,7 @@ var body: some View {
 
 
 ***
-#### DatePicker
+### DatePicker
 시간을 설정할 수 있는 메소드   
 <img src = "https://user-images.githubusercontent.com/47841046/116514274-c5006480-a905-11eb-8eb5-81dc13867ec4.png"> </img><br/>
 <img src ="https://user-images.githubusercontent.com/47841046/116515175-e7df4880-a906-11eb-9727-2cbdefa6f374.png"> </img><br/>
@@ -48,7 +48,7 @@ struct ContentView: View {
 ```
 
 ***
-#### Stepper
+### Stepper
 Stepper를 이용해 원하는 정수를 정확히 표기할 수 있다.   
 <img src="https://user-images.githubusercontent.com/47841046/116516003-009c2e00-a908-11eb-8a0e-17c6617f2e62.png"> </img><br/>
 
@@ -86,7 +86,7 @@ struct ContentView: View {
             }
 ```
 *** 
-#### Core ML (Machine Learning)
+### Core ML (Machine Learning)
 Calendar의 데이터 타입은 'date'로 되어있음   
 'date' --> 'double'로 바꿔야함   
 그러기 위해 dateComponents 메소드 사용
