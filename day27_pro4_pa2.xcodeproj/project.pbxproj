@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56254597263AA1DC006000D5 /* SleepCalculator.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 56254596263AA1DC006000D5 /* SleepCalculator.mlmodel */; };
 		56A6A31E263A7ED60072FA16 /* day27_pro4_pa2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6A31D263A7ED60072FA16 /* day27_pro4_pa2App.swift */; };
 		56A6A320263A7ED60072FA16 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6A31F263A7ED60072FA16 /* ContentView.swift */; };
 		56A6A322263A7ED90072FA16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A6A321263A7ED90072FA16 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		56254596263AA1DC006000D5 /* SleepCalculator.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SleepCalculator.mlmodel; sourceTree = SOURCE_ROOT; };
 		56A6A31A263A7ED60072FA16 /* day27_pro4_pa2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = day27_pro4_pa2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A6A31D263A7ED60072FA16 /* day27_pro4_pa2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = day27_pro4_pa2App.swift; sourceTree = "<group>"; };
 		56A6A31F263A7ED60072FA16 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			children = (
 				56A6A31D263A7ED60072FA16 /* day27_pro4_pa2App.swift */,
 				56A6A31F263A7ED60072FA16 /* ContentView.swift */,
+				56254596263AA1DC006000D5 /* SleepCalculator.mlmodel */,
 				56A6A321263A7ED90072FA16 /* Assets.xcassets */,
 				56A6A326263A7ED90072FA16 /* Info.plist */,
 				56A6A323263A7ED90072FA16 /* Preview Content */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56A6A320263A7ED60072FA16 /* ContentView.swift in Sources */,
+				56254597263AA1DC006000D5 /* SleepCalculator.mlmodel in Sources */,
 				56A6A31E263A7ED60072FA16 /* day27_pro4_pa2App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
