@@ -11,6 +11,7 @@
 		56228C00263BF76E00084536 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56228BFF263BF76E00084536 /* ContentView.swift */; };
 		56228C02263BF77100084536 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56228C01263BF77100084536 /* Assets.xcassets */; };
 		56228C05263BF77100084536 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56228C04263BF77100084536 /* Preview Assets.xcassets */; };
+		565C5487263BFE15004254DC /* SleepCalculator.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 565C5486263BFE15004254DC /* SleepCalculator.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		56228C01263BF77100084536 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56228C04263BF77100084536 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		56228C06263BF77100084536 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		565C5486263BFE15004254DC /* SleepCalculator.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SleepCalculator.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				56228BFD263BF76E00084536 /* day28_pro4_pa3App.swift */,
 				56228BFF263BF76E00084536 /* ContentView.swift */,
+				565C5486263BFE15004254DC /* SleepCalculator.mlmodel */,
 				56228C01263BF77100084536 /* Assets.xcassets */,
 				56228C06263BF77100084536 /* Info.plist */,
 				56228C03263BF77100084536 /* Preview Content */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56228C00263BF76E00084536 /* ContentView.swift in Sources */,
+				565C5487263BFE15004254DC /* SleepCalculator.mlmodel in Sources */,
 				56228BFE263BF76E00084536 /* day28_pro4_pa3App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
