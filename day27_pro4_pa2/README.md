@@ -6,12 +6,16 @@ Project4 date picker(datePicker)와 두 가지의 steppers(Stepper)를 결합해
 사용자가 얼마나 잠을 자야하는지, 커피를 얼마나 마셔야하는지 알려준다.   
 <img src = "https://user-images.githubusercontent.com/47841046/116516456-989a1780-a908-11eb-93c4-6a765a337ff2.png" > </img><br/>
    
+UI 정리   
+<img src="https://user-images.githubusercontent.com/47841046/116634288-9383a980-a996-11eb-8283-8fb5f7d97076.png"></img><br/>
+
 ***
 ### .navigationBarTitle, Items
 오른쪽 상단 위에 trailing을 통해 'Calculate'라는 텍스트를 놓을 수 있다.    
 만약 여러 버튼을 놓고 싶다면 HStack을 사용하기   
 아래의 action action: calculateBedtimes 함수는 다음에 나오게 됨   
 <img src = "https://user-images.githubusercontent.com/47841046/116513404-7d2d0d80-a904-11eb-83ca-17b3310fb2e8.png" ></img><br/>
+
 
 ```swift
 var body: some View {
