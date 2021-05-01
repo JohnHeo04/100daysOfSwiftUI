@@ -5,6 +5,10 @@
 //  Created by John Hur on 2021/04/30.
 //
 //  Challenges
+//  1. 각 VStack을 Section으로 바꾸기
+//     Refe.Day16,17,18
+//  2. "Number of cups" Steppers를 Picker메소드로 똑같은 범위 보여주기
+//  3. 위의 "Calculate"버튼은 없애고 아래에 추천 취침시간을 나이스하고 큰 폰트를 이용하여 보여주기
 
 import SwiftUI
 
@@ -20,52 +24,58 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("When do you want to wake up?")
-                        .font(.headline)
-                    
-                    DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
-                        .labelsHidden()
-                    
-                        .datePickerStyle(WheelDatePickerStyle())
+                Section (
+                    header: Text("When do you want to wake up?").font(.headline)) {DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+                    .labelsHidden()
+                    .datePickerStyle(WheelDatePickerStyle())
                 }
                 
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Desired amount of sleep")
-                        .font(.headline)
-                    
-                    Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
-                        Text("\(sleepAmount, specifier: "%g") hours")
-                    }
-                }
+//                VStack(alignment: .leading, spacing: 0) {
+//                    Text("When do you want to wake up?")
+//                        .font(.headline)
+//
+//                    DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+//                        .labelsHidden()
+//
+//                        .datePickerStyle(WheelDatePickerStyle())
+//                }
                 
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Daily coffee intake")
-                        .font(.headline)
-                    
-                    Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
-                        Text("\(sleepAmount, specifier: "%g") hours")
-                    }
-                }
+//                VStack(alignment: .leading, spacing: 0) {
+//                    Text("Desired amount of sleep")
+//                        .font(.headline)
+//
+//                    Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
+//                        Text("\(sleepAmount, specifier: "%g") hours")
+//                    }
+//                }
                 
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Daily coffee intake")
-                        .font(.headline)
-                    
-                    Stepper(value: $coffeeAmount, in: 1...20) {
-                        if coffeeAmount == 1 {
-                            Text("1 cup")
-                        } else {
-                            Text("\(coffeeAmount) cups")
-                        }
-                    }
-                }
+//                VStack(alignment: .leading, spacing: 0) {
+//                    Text("Daily coffee intake")
+//                        .font(.headline)
+//
+//                    Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
+//                        Text("\(sleepAmount, specifier: "%g") hours")
+//                    }
+//                }
                 
-                VStack(alignment: .leading, spacing: 0){
-                    Text("Ideal Bedtime..")
-                        .font(.headline)
-                    // put into here Calculation Value
-                }
+//                VStack(alignment: .leading, spacing: 0) {
+//                    Text("Daily coffee intake")
+//                        .font(.headline)
+//
+//                    Stepper(value: $coffeeAmount, in: 1...20) {
+//                        if coffeeAmount == 1 {
+//                            Text("1 cup")
+//                        } else {
+//                            Text("\(coffeeAmount) cups")
+//                        }
+//                    }
+//                }
+                
+//                VStack(alignment: .leading, spacing: 0){
+//                    Text("Ideal Bedtime..")
+//                        .font(.headline)
+//                    // put into here Calculation Value
+//                }
             }
             .navigationBarTitle("BetterRest")
             .navigationBarItems(trailing: Button(action: calculateBedtimes) {
