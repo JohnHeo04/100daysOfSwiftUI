@@ -58,6 +58,8 @@ struct ContentView: View {
 //                        Text("\(sleepAmount, specifier: "%g") hours")
 //                    }
 //                }
+                
+                // 아직
                 Section (header: Text("Daily coffee intake").font(.headline)) {
                     Stepper(value: $coffeeAmount, in: 1...20) {
                         if coffeeAmount == 1 {
@@ -67,6 +69,16 @@ struct ContentView: View {
                         }
                     }
                 }
+                // 피커로 바꾸기, I donna
+//                Section (header: Text("Daily coffee intake").font(.headline)) {
+//                    Picker(selection: $coffeeAmount, label: Text("plz")) {
+//                        ForEach(1 ..< 20) {
+//                            Text(20)
+//                        }
+//                    }
+//                }
+                
+                
 //                VStack(alignment: .leading, spacing: 0) {
 //                    Text("Daily coffee intake")
 //                        .font(.headline)
@@ -85,15 +97,19 @@ struct ContentView: View {
 //                        .font(.headline)
 //                    // put into here Calculation Value
 //                }
+                Section(header: Text("Your ideal bedtime is...").font(.headline)) {
+                    Text("\(calculateBedtimes)")
+                }
+                
             }
             .navigationBarTitle("BetterRest")
-            .navigationBarItems(trailing: Button(action: calculateBedtimes) {
-                Text ("Calculate")
-                }
-            )
-            .alert(isPresented: $showingAlert) {
-                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-            }
+//            .navigationBarItems(trailing: Button(action: calculateBedtimes) {
+//                Text ("Calculate")
+//                }
+//            )
+//            .alert(isPresented: $showingAlert) {
+//                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+//            }
         }
     }
     
@@ -104,13 +120,14 @@ struct ContentView: View {
         return Calendar.current.date(from: components) ?? Date()
     }
     
-        func calculateBedtimes() {
+var calculateBedtimes: String {
             let model = SleepCalculator()
             
             let components = Calendar.current.dateComponents([.hour,.minute], from: wakeUp)
             let hour = (components.hour ?? 0) * 60 * 60
             let minute = (components.minute ?? 0) * 60
             
+        var message: String
             do {
                 let prediction = try
                     model.prediction(wake: Double(hour + minute), estimatedSleep: sleepAmount, coffee: Double(coffeeAmount))
@@ -120,13 +137,16 @@ struct ContentView: View {
                 let formatter = DateFormatter()
                 formatter.timeStyle = .short
                 
-                alertMessage = formatter.string(from: sleepTime)
-                alertTitle = "Your ideal bedtime is..."
+//                alertMessage = formatter.string(from: sleepTime)
+//                alertTitle = "Your ideal bedtime is..."
+                message = formatter.string(from: sleepTime)
             } catch {
-                alertTitle = "Error"
-                alertMessage = "Sorry, there was a problem calculating your bedtime."
+                message = "Error"
+//                alertTitle = "Error"
+//                alertMessage = "Sorry, there was a problem calculating your bedtime."
             }
-            showingAlert = true
+        return message
+//            showingAlert = true
         }
 }
 
