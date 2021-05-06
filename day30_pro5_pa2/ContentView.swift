@@ -1,6 +1,7 @@
 //
 //  ContentView.swift
 //  day30_pro5_pa2
+//  Day30 : Adding to a list
 //
 //  Created by John Hur on 2021/05/06.
 //
