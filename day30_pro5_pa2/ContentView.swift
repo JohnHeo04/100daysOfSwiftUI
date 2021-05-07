@@ -25,6 +25,7 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 TextField("Enter your word", text: $newWord, onCommit: addNewWord)
+                    //  TextField가 이뻐보이지 않기에 아래의 modifier를 써서 모서리를 둥글게 해줌
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocapitalization(.none)
                     .padding()
@@ -64,8 +65,8 @@ struct ContentView: View {
             wordError(title: "Word not possiblbe", message: "That isn't a real word")
             return
         }
-        
-        
+        //  만약 우리가 append(answer을 쓰게되면 목록의 제일 끝에 나타나게 된다. 또한 스크린 밖으로 나갈 수 도 있다.
+        //  그러나 inserting을 사용하게 되면 list의 제일 위에서 자동으로 시작하게 된다.
         usedWords.insert(answer, at: 0)
         newWord = ""
     }
@@ -84,6 +85,8 @@ struct ContentView: View {
             }
         }
         // If were are *here* then there was a problem - trigger a crash and report the error
+        // 오류가 발생하던 안하던 fatalError()이라는 function은 발견된 문제를 우리한테 깔끔하게 알려준다.
+        // fatalError()을 호출하게 되면 우리의 앱은 충돌하게 된다. 즉 다운된다는 말씀.
         fatalError("Could not load start.txt from bundle.")
     }
     
