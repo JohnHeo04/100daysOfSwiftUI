@@ -6,8 +6,8 @@
 //  2. Add a left bar button item that calls startGame(), so users can restart with a new word whenever they want to.
 //  3. Put a text view below the List so you can track and show the player’s score for a given root word. How you calculate score is down to you, but something involving number of words and their letter count would be reasonable.
 //
-//  1.3개의 문자보다 짧은건 허락하지 않고 또는 우리의 시작단어도 허락해선 안된다.
-//    이걸 체크하기 위해 isReal()메소드 활용
+//  1. 3개의 문자보다 짧은건 허락하지 않고 또는 우리의 시작단어도 허락해선 안된다.
+//     3개의 문자를 체크하기 위해 isReal()메소드 활용...
 
 //  Created by John Hur on 2021/05/08.
 //
