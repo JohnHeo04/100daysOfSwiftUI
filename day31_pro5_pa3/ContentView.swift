@@ -7,16 +7,27 @@
 //  3. Put a text view below the List so you can track and show the player’s score for a given root word. How you calculate score is down to you, but something involving number of words and their letter count would be reasonable.
 //
 //  1. 3개의 문자보다 짧은건 허락하지 않고 또는 우리의 시작단어도 허락해선 안된다.
-//     3개의 문자를 체크하기 위해 isReal()메소드 활용...
+//     3개의 문자를 체크하기 위해 isReal()메소드 활용
+//     가장 쉬운법 : 3글자 이하이면 false를 return.
+//     두번째 파트, input word에 start word 비교하기, 만약 같다면 false를 return하라
 
-//  Created by John Hur on 2021/05/08.
+//  2. startGame() 왼쪽 추가 버튼 만들기, 사용자가 다시하기 원한다면 restart 버튼을 눌러 새로운 단어를 갱신할 수 있음
+
+//  3. List 밑에 text view 넣기, 그래서 사용자는 사용자의 점수를 보여줄 수 있다.
+//     단어의 수와 글자 수가 포함된것이 합리적일것임(?).
+
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    // 사용자 점수 변수 입력
+    @State private var userScore = 0
+    
     @State private var usedWords = [String]()
+    // 목적 단어
     @State private var rootWord = ""
+    // 입력할 단어
     @State private var newWord = ""
     
     // -Error alerts-
@@ -32,13 +43,25 @@ struct ContentView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocapitalization(.none)
                     .padding()
-                
+                // 목록의 사용된 단어 나열
                 List(usedWords, id: \.self) {
                     Image(systemName: "\($0.count).circle")
                     Text($0)
                 }
+                // 리스트 밑 사용자 점수 출력
+                VStack {
+                    Text("Score is \(userScore)")
+                }
             }
+            //  위의 왼쪽 정답단어
             .navigationBarTitle(rootWord)
+            // Challenge2
+            // 아래의 modifier를 이용해 Text를 통해 startGame() 함수 다시 호출
+            .navigationBarItems(leading: Button(action: {
+                startGame()
+            }) {
+                Text("Restart!")
+            } )
             .onAppear(perform: startGame)
             .alert(isPresented: $showingError) {
                 Alert(title: Text(errorTitle), message: Text(errorMessage), dismissButton: .default(Text("OK")))
@@ -130,13 +153,21 @@ struct ContentView: View {
     //  만약 위의 메소드 체크가 끝나면 한 번 더 또 다른 NSRange를 반환시킨다.
     //  그러나 만약 단어가 'OK'라면 NSNotFound로 범위가 위치하게 된다.
     
-    //  전엥 지금까지 3개의 메소드가 쓰이기 위해 위쪽으로 넘어가 변수를 추가해준다.
+    //  지금까지 3개의 메소드가 쓰이기 위해 위쪽으로 넘어가 변수를 추가해준다.
     func isReal(word: String) -> Bool {
         let checker = UITextChecker()
         let range = NSRange(location: 0, length: word.utf16.count)
         let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
         
         return misspelledRange.location == NSNotFound
+    }
+    
+    func wordTapped(_ rootWord: String) {
+        if newWord == rootWord {
+            userScore += 1
+        } else {
+            userScore -= 1
+        }
     }
     
     //  parameters에 기반하여 title과 message를 set한다.
