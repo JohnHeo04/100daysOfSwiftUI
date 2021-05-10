@@ -1,6 +1,6 @@
 # 100 days of SwiftUI
 ***
-## Table of Contents
+
 ### [1. Project1_Day16-18](https://github.com/JohnHeo04/100daysOfSwiftUI/tree/master/WeSplit)
 <img src = "https://user-images.githubusercontent.com/47841046/114920452-69919980-9e64-11eb-9f67-c084f2793b39.png" width = "25%" heigth = "25%"></img><br/>
 
