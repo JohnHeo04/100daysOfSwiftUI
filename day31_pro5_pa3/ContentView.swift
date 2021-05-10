@@ -21,14 +21,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    // 사용자 점수 변수 입력
-    @State private var userScore = 0
-    
     @State private var usedWords = [String]()
     // 목적 단어
     @State private var rootWord = ""
     // 입력할 단어
     @State private var newWord = ""
+
+    // 사용자 점수 변수 입력
+    private var userScore: Int {
+        var count = 0
+        for word in usedWords {
+            count += word.count
+        }
+        return count
+    }
+    
     
     // -Error alerts-
     @State private var errorTitle = ""
@@ -139,7 +146,6 @@ struct ContentView: View {
                 return false
             }
         }
-        
         return true
     }
     
@@ -162,13 +168,14 @@ struct ContentView: View {
         return misspelledRange.location == NSNotFound
     }
     
-    func wordTapped(_ rootWord: String) {
-        if newWord == rootWord {
-            userScore += 1
-        } else {
-            userScore -= 1
-        }
-    }
+    // ** 사용자 점수 처리 잠시 보류 **
+//    func wordTapped(_ answer: String) {
+//        if newWord == rootWord {
+//            userScore += 1
+//        } else {
+//            userScore -= 1
+//        }
+//    }
     
     //  parameters에 기반하여 title과 message를 set한다.
     //  다음 showingError을 true로 바꾼다.
