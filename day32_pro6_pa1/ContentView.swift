@@ -1,10 +1,12 @@
 //
 //  ContentView.swift
 //  day32_pro6_pa1
-//  Day32 : Customizing animations in SwiftUI
+//  Day32 : Animating bindings
 //
 //  Created by John Hur on 2021/05/11.
 //
+
+// animation() modifier는 swiftUI 현재 value와 new value 사이 어디든 결합 가능
 
 import SwiftUI
 
@@ -12,35 +14,26 @@ struct ContentView: View {
     @State private var animationAmount: CGFloat = 1
     
     var body: some View {
-        Button("Tap Me") {
-            // 버튼을 'Tap'하게 되면 크기가 1씩 증가
-            // 변수 값 animationAmount에 탭할때 마다 값 +1
-//            self.animationAmount += 1
+        print(animationAmount)
+        // return을 사용하면 view가 어떤 부분을 돌려 받는지 알 수 있음
+        return VStack {
+            // Stepper로 animationAmount 값 +, -로 조절가능
+            Stepper("Scale amount", value: $animationAmount.animation(
+                        Animation.easeInOut(duration: 1)
+                            .repeatCount(3, autoreverses: true)), in: 1...10)
+            
+            Spacer()
+            
+            Button("Tap Me") {
+                self.animationAmount += 1
+            }
+            .padding(40)
+            .background(Color.red)
+            .foregroundColor(.white)
+            .clipShape(Circle())
+            .scaleEffect(animationAmount)
             
         }
-        .padding(50)
-        .background(Color.red)
-        .foregroundColor(.white)
-        .clipShape(Circle())
-        // 버튼 위에 빨간 원형 선을 만든다.
-        // opacity 2-1 = 1로 설정
-        // 두번째 animationAmount에 +=1 이 되면 0이되어 투명해짐
-        .overlay(
-            Circle()
-                    .stroke(Color.red)
-                    .scaleEffect(animationAmount)
-                    .opacity(Double(2 - animationAmount))
-                    .animation(
-                        Animation.easeInOut(duration: 1)
-                            .repeatForever(autoreverses: false)
-            //                .repeatCount(3, autoreverses: true)
-                )
-            )
-        .onAppear {
-            self.animationAmount = 2
-        }
-//        .scaleEffect(animationAmount)
-        
 
     }
 }
