@@ -12,6 +12,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var degrees = 0.0
+    @State private var isRotated = false
     // 사용자 점수 변수 설정
     @State private var userScore = 0
     
@@ -21,6 +23,11 @@ struct ContentView: View {
     
     @State private var showingScore = false
     @State private var scoreTitle = ""
+    
+    @State private var spinAnimationAmounts = [0.0, 0.0, 0.0]
+    @State private var animatingIncreaseScore = false
+    
+    @State private var allowSubmitAnswer = true
     
     var body: some View {
         ZStack {
@@ -35,7 +42,8 @@ struct ContentView: View {
                         .font(.largeTitle)
                         .fontWeight(.black)
                 }
-                 // 0,1,2
+                // 0,1,2
+                // 여기가 아닌가
                 ForEach(0 ..< 3) { number in Button(action: {
                     self.flagTapped(number)
                 }) { Image(self.countries[number])
@@ -57,27 +65,52 @@ struct ContentView: View {
             }
         }
         // 아래의 userScore를 넣어 알림창에서 마지막 몇점에서 끝났는지 알려줌
-        .alert(isPresented: $showingScore) {
-            Alert(title: Text(scoreTitle), message: Text("Your score is \(userScore)"), dismissButton: .default(Text("Continue")) {
-                    self.askQuestion()
-                })
-        }
+//        .alert(isPresented: $showingScore) {
+//            Alert(title: Text(scoreTitle), message: Text("Your score is \(userScore)"), dismissButton: .default(Text("Continue")) {
+//                    self.askQuestion()
+//                })
+//        }
     }
     // 아래 else 구문에 나오는 \(countries[number])을 써줌으로써
     // 틀린 국기의 이름을 보여줌.
     func flagTapped(_ number: Int) {
+        guard allowSubmitAnswer else { return }
+        allowSubmitAnswer = false
+        
+        let nextQuestionDelay = 1.5
+        let flagAnimationDuration = 0.5
+        let scoreUpdateDuration = 1.5
+        
         if number == correctAnswer {
             scoreTitle = "Correct"
             userScore += 1
+            
+            withAnimation(Animation.easeInOut(duration: flagAnimationDuration)) {
+                self.spinAnimationAmounts[number] += 360
+            }
+            withAnimation(Animation.linear(duration: scoreUpdateDuration)) {
+                self.animatingIncreaseScore = true
+            }
         } else {
             scoreTitle = "Wrong! That's the flag of \(countries[number])"
             userScore -= 1
+            
+            withAnimation(Animation.easeInOut(duration: flagAnimationDuration)) {
+                self.shakeAnimationAmounts[number] = 2
+            }
+            withAnimation(Animation.linear(duration: scoreUpdateDuration)) {
+                self.animatingDecreaseScore = true
+            }
         }
         showingScore = true
     }
+    
+    
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+        
+        allowSubmitAnswer = true
     }
     // if correct +=1, wrong +=0 or -=1
     // 스코어 함수 생성
