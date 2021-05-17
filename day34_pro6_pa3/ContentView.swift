@@ -95,12 +95,12 @@ struct ContentView: View {
             scoreTitle = "Wrong! That's the flag of \(countries[number])"
             userScore -= 1
             
-            withAnimation(Animation.easeInOut(duration: flagAnimationDuration)) {
-                self.shakeAnimationAmounts[number] = 2
-            }
-            withAnimation(Animation.linear(duration: scoreUpdateDuration)) {
-                self.animatingDecreaseScore = true
-            }
+//            withAnimation(Animation.easeInOut(duration: flagAnimationDuration)) {
+//                self.shakeAnimationAmounts[number] = 2
+//            }
+//            withAnimation(Animation.linear(duration: scoreUpdateDuration)) {
+//                self.animatingDecreaseScore = true
+//            }
         }
         showingScore = true
     }
