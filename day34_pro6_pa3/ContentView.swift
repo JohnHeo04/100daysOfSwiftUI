@@ -1,3 +1,4 @@
+//  Clone_clarknt
 //
 //  ContentView.swift
 //  day34_pro6_pa3
@@ -11,21 +12,53 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @State private var degrees = 0.0
-    @State private var isRotated = false
-    // 사용자 점수 변수 설정
-    @State private var userScore = 0
+struct FlagImage: View {
+    var name: String
     
-    @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
+    var body: some View {
+        Image(name)
+            .renderingMode(.original)
+            .clipShape(Capsule())
+            .overlay(Capsule().stroke(Color.black, lineWidth: 1))
+            .shadow(color: .black, radius: 2)
+    }
+}
 
+struct ShakeEffect: GeometryEffect {
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        return ProjectionTransform(CGAffineTransform(translationX: -30 * sin(position * 2 * .pi), y:0))
+    }
+    
+    init(shakes: Int) {
+        position = CGFloat(shakes)
+    }
+    
+    var position: CGFloat
+    var animatableData: CGFloat {
+        get { position }
+        set { position = newValue }
+    }
+}
+
+struct ContentView: View {
+    @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
+    
     @State private var correctAnswer = Int.random(in: 0...2)
-    
-    @State private var showingScore = false
     @State private var scoreTitle = ""
+    @State private var score = 0
     
-    @State private var spinAnimationAmounts = [0.0, 0.0, 0.0]
+    // chall 1
+    @State private var spinAnimationAmounts = [0.0,0.0,0.0]
     @State private var animatingIncreaseScore = false
+    
+    // chall 3
+    @State private var shakeAnimationAmounts = [0,0,0]
+    @State private var animatingDecreaseScore = false
+    
+    // chall 2
+    @State var animateOpacity = false
+    
+    @State private var wrongCountry = ""
     
     @State private var allowSubmitAnswer = true
     
@@ -35,98 +68,141 @@ struct ContentView: View {
             
             VStack(spacing: 30) {
                 VStack {
-                    Text("Tap the flag of")
+                    Text("Find the flag of")
                         .foregroundColor(.white)
-                    Text(countries[correctAnswer])
-                        .foregroundColor(.white)
-                        .font(.largeTitle)
-                        .fontWeight(.black)
-                }
-                // 0,1,2
-                // 여기가 아닌가
-                ForEach(0 ..< 3) { number in Button(action: {
-                    self.flagTapped(number)
-                }) { Image(self.countries[number])
-                        .renderingMode(.original)
-                    .clipShape(Capsule())
-                    .overlay(Capsule()
-                        .stroke(Color.black, lineWidth:1))
-                    .shadow(color: .black, radius: 2)
-                        }
+                    
+                    HStack {
+                        Spacer()
+                        
+                        Text(countries[correctAnswer])
+                            .foregroundColor(.white)
+                            .font(.largeTitle)
+                            .fontWeight(.black)
+                        
+                        Spacer()
+                        
                     }
+                }
+                
+                ForEach(0 ..< 3) { number in FlagImage(name: self.countries[number])
+                    // chall 1
+                    .rotation3DEffect(.degrees(self.spinAnimationAmounts[number]), axis: (x: 0, y: 1, z: 0))
+                    .modifier(ShakeEffect(shakes: self.shakeAnimationAmounts[number] * 2))
+                    .opacity(self.animateOpacity ? (number == self.correctAnswer ? 1: 0.25) : 1)
+                    .onTapGesture {
+                        self.flagTapped(number)
+                    }
+                }
+                
+                HStack {
+                    Spacer()
+                    
+                    Text("Score")
+                        .foregroundColor(.white)
+                    
+                    ZStack {
+                        // chall 1 & 3
+                        Text("\(score)")
+                            .foregroundColor(animatingIncreaseScore ? .green : (animatingDecreaseScore ? .red : .white))
+                        
+                        // chall 1
+                        Text("+1")
+                            .font(.headline)
+                            .foregroundColor(animatingIncreaseScore ? .green : .clear)
+                            .opacity(animatingIncreaseScore ? 0 : 1)
+                            .offset(x: 0, y: animatingIncreaseScore ? -50 : -20)
+                        
+                        // chall 3
+                        Text("-1")
+                            .foregroundColor(animatingDecreaseScore ? .red : .clear)
+                            .font(.headline)
+                            .opacity(animatingDecreaseScore ? 0 : 1)
+                            .offset(x: 0, y: animatingDecreaseScore ? 50 : 20)
+                        
+                    }
+                    
+                    Spacer()
+                    
+                }
+                .offset(x: 0, y: 30)
+                
                 Spacer()
-                // 아래의 VStack을 써서 국기 밑에 Score점수가 뜨게함
-                VStack {
-                   Text("SCORE 👉 \(userScore)")
-                   .foregroundColor(.white)
-                   .font(.largeTitle)
-               }
-               Spacer()
+                
+                // chall 3
+                Text("That was \(wrongCountry)")
+                    .font(.headline)
+                    .foregroundColor(animatingDecreaseScore ? .red : .clear)
+                
             }
         }
-        // 아래의 userScore를 넣어 알림창에서 마지막 몇점에서 끝났는지 알려줌
-//        .alert(isPresented: $showingScore) {
-//            Alert(title: Text(scoreTitle), message: Text("Your score is \(userScore)"), dismissButton: .default(Text("Continue")) {
-//                    self.askQuestion()
-//                })
-//        }
     }
-    // 아래 else 구문에 나오는 \(countries[number])을 써줌으로써
-    // 틀린 국기의 이름을 보여줌.
+    
     func flagTapped(_ number: Int) {
+        // chall 1
         guard allowSubmitAnswer else { return }
         allowSubmitAnswer = false
         
+        // chall 1
         let nextQuestionDelay = 1.5
         let flagAnimationDuration = 0.5
         let scoreUpdateDuration = 1.5
         
+        // chall 2
+        withAnimation(Animation.easeInOut(duration: flagAnimationDuration)) {
+            self.animateOpacity = true
+        }
+        
         if number == correctAnswer {
-            scoreTitle = "Correct"
-            userScore += 1
-            
+            score += 1
+            // chall 1
             withAnimation(Animation.easeInOut(duration: flagAnimationDuration)) {
-                self.spinAnimationAmounts[number] += 360
+                self.shakeAnimationAmounts[number] += 360
             }
             withAnimation(Animation.linear(duration: scoreUpdateDuration)) {
                 self.animatingIncreaseScore = true
             }
-        } else {
-            scoreTitle = "Wrong! That's the flag of \(countries[number])"
-            userScore -= 1
-            
-//            withAnimation(Animation.easeInOut(duration: flagAnimationDuration)) {
-//                self.shakeAnimationAmounts[number] = 2
-//            }
-//            withAnimation(Animation.linear(duration: scoreUpdateDuration)) {
-//                self.animatingDecreaseScore = true
-//            }
         }
-        showingScore = true
+        else {
+            wrongCountry = countries[number]
+            score -= 1
+            // chall 3
+            withAnimation(Animation.easeInOut(duration: flagAnimationDuration)) {
+                self.shakeAnimationAmounts[number] = 2
+            }
+            withAnimation(Animation.linear(duration : scoreUpdateDuration)) {
+                self.animatingDecreaseScore = true
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + nextQuestionDelay) {
+            self.askQuestion()
+        }
     }
-    
-    
+     
     func askQuestion() {
+        // chall 1
+        self.spinAnimationAmounts = [0.0, 0.0, 0.0]
+        self.animatingIncreaseScore = false
+        // chall 2
+        self.animateOpacity = false
+        // chall 3
+        self.shakeAnimationAmounts = [0,0,0]
+        self.animatingDecreaseScore = false
+        
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
         
+        // chall 1
         allowSubmitAnswer = true
     }
-    // if correct +=1, wrong +=0 or -=1
-    // 스코어 함수 생성
-    // 생략... 아래의 함수를 통해 점수가 올라가고 내려가는 함수를 만들려 했으나
-    // flagTapped의 함수 중
-    // 아래 userScore += 1 이라는 방법을 써서 간단하게 해결할 수 있었음
-//    func scores() {
-//        if scoreTitle
-//        userScore
-//
-//    }
-    
 }
-
+    
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
+ 
+
+
+
 }
