@@ -1,4 +1,5 @@
 //  Clone_clarknt
+//  Thank you for teaching me clarknt! :)
 //
 //  ContentView.swift
 //  day34_pro6_pa3
@@ -16,6 +17,7 @@ struct FlagImage: View {
     var name: String
     
     var body: some View {
+        // 국기 렌더링을 위로 빼줌
         Image(name)
             .renderingMode(.original)
             .clipShape(Capsule())
@@ -23,7 +25,7 @@ struct FlagImage: View {
             .shadow(color: .black, radius: 2)
     }
 }
-
+// ShakeEffect를 이용해서 틀리면 국기가 흔들림
 struct ShakeEffect: GeometryEffect {
     func effectValue(size: CGSize) -> ProjectionTransform {
         return ProjectionTransform(CGAffineTransform(translationX: -30 * sin(position * 2 * .pi), y:0))
