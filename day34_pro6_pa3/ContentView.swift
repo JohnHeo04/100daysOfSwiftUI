@@ -10,6 +10,8 @@
 //
 //  Created by John Hur on 2021/05/14.
 //
+//  *** 배운것 ***
+//  함수 안에 Animation 결합 가능
 
 import SwiftUI
 
@@ -34,7 +36,7 @@ struct ShakeEffect: GeometryEffect {
     init(shakes: Int) {
         position = CGFloat(shakes)
     }
-    
+    // get {}, set {} 다시 공부하기
     var position: CGFloat
     var animatableData: CGFloat {
         get { position }
@@ -75,7 +77,7 @@ struct ContentView: View {
                     
                     HStack {
                         Spacer()
-                        
+                        //  Text에 올바른 정답 국기를 출력함
                         Text(countries[correctAnswer])
                             .foregroundColor(.white)
                             .font(.largeTitle)
@@ -85,11 +87,14 @@ struct ContentView: View {
                         
                     }
                 }
-                
+                //
                 ForEach(0 ..< 3) { number in FlagImage(name: self.countries[number])
                     // chall 1
+                    // 아래의 modifier를 통해 정답 국기를 360도 회전함
                     .rotation3DEffect(.degrees(self.spinAnimationAmounts[number]), axis: (x: 0, y: 1, z: 0))
+                    // 위에 만들어진 struct - modifier중 ShakeEffect를 호출
                     .modifier(ShakeEffect(shakes: self.shakeAnimationAmounts[number] * 2))
+                    //  투명 modifier, 정답을 제외한 틀린 답은 0.25 투명효과가 적용됨
                     .opacity(self.animateOpacity ? (number == self.correctAnswer ? 1: 0.25) : 1)
                     .onTapGesture {
                         self.flagTapped(number)
@@ -104,10 +109,12 @@ struct ContentView: View {
                     
                     ZStack {
                         // chall 1 & 3
+                        // 점수
                         Text("\(score)")
                             .foregroundColor(animatingIncreaseScore ? .green : (animatingDecreaseScore ? .red : .white))
                         
                         // chall 1
+                        //
                         Text("+1")
                             .font(.headline)
                             .foregroundColor(animatingIncreaseScore ? .green : .clear)
