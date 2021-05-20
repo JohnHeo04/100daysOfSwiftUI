@@ -52,10 +52,14 @@ struct ContentView: View {
     @State private var score = 0
     
     // chall 1
+    // spin Animation초기값 을 배열로 표현함
+    // 점수 증가 값을 true로 선언하면 초기 값이 .green으로 시작함
     @State private var spinAnimationAmounts = [0.0,0.0,0.0]
     @State private var animatingIncreaseScore = false
     
     // chall 3
+    // shake Animation 초기값 아래와 같음
+    // 점수 감소 값을 true로 선언하면 초기 값이 .red로 시작함, 아래
     @State private var shakeAnimationAmounts = [0,0,0]
     @State private var animatingDecreaseScore = false
     
@@ -94,7 +98,8 @@ struct ContentView: View {
                     .rotation3DEffect(.degrees(self.spinAnimationAmounts[number]), axis: (x: 0, y: 1, z: 0))
                     // 위에 만들어진 struct - modifier중 ShakeEffect를 호출
                     .modifier(ShakeEffect(shakes: self.shakeAnimationAmounts[number] * 2))
-                    //  투명 modifier, 정답을 제외한 틀린 답은 0.25 투명효과가 적용됨
+                    //  위에서 animateOpacity 값을 false로 설정해뒀기 때문에
+                    //  투명 modifier: opacity, 정답을 제외한 틀린 답은 0.25 투명효과가 적용됨
                     .opacity(self.animateOpacity ? (number == self.correctAnswer ? 1: 0.25) : 1)
                     .onTapGesture {
                         self.flagTapped(number)
@@ -112,6 +117,7 @@ struct ContentView: View {
                         // 점수
                         Text("\(score)")
                             .foregroundColor(animatingIncreaseScore ? .green : (animatingDecreaseScore ? .red : .white))
+                            .font(.title)
                         
                         // chall 1
                         //
@@ -165,7 +171,7 @@ struct ContentView: View {
             score += 1
             // chall 1
             withAnimation(Animation.easeInOut(duration: flagAnimationDuration)) {
-                self.shakeAnimationAmounts[number] += 360
+                self.spinAnimationAmounts[number] += 360
             }
             withAnimation(Animation.linear(duration: scoreUpdateDuration)) {
                 self.animatingIncreaseScore = true
@@ -187,7 +193,7 @@ struct ContentView: View {
             self.askQuestion()
         }
     }
-     
+    // 다음 문제로 넘어가는 함수
     func askQuestion() {
         // chall 1
         self.spinAnimationAmounts = [0.0, 0.0, 0.0]
